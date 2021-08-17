@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+
+<filter>
+<display-name>Student Project</display-name>
+<filter-name>guiceFilter</filter-name>
+<filter-class>com.google.inject.servlet.GuiceFilter</filter-class>
+</filter>
+
+<filter-mapping>
+<filter-name>guiceFilter</filter-name>
+<url-pattern>/*</url-pattern>
+</filter-mapping>
+
+<listener>
+<listener-class>com.listener.ServiceListener</listener-class>
+</listener>
+</web-app>
