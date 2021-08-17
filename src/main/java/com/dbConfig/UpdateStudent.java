@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,39 +18,42 @@ import org.hibernate.cfg.Configuration;
 import com.google.inject.Singleton;
 
 @Singleton
-@WebServlet("/find")
-public class FindStudent extends HttpServlet{
+@WebServlet("/update")
+public class UpdateStudent extends HttpServlet{
 	@Override
-	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException,IOException
+	public void doPost(HttpServletRequest req,HttpServletResponse resp)throws ServletException,IOException
 	{
 		int sid=Integer.parseInt(req.getParameter("sid"));
+		String sname=req.getParameter("sname");
+		
 		Configuration con=new Configuration().configure().addAnnotatedClass(Student.class);
 		SessionFactory sf=con.buildSessionFactory();
 		Session session=sf.openSession();
 		
-		Transaction tx=session.beginTransaction();
-		Query q1=session.createQuery("from Student where sid="+sid);
 		Student s=null;
+		Transaction tx=session.beginTransaction();
+		Query query=session.createQuery("from Student where sid="+sid);
 		try {
-		s=(Student) q1.getSingleResult();
+			s=(Student) query.getSingleResult();
 		}
 		catch(NoResultException e)
 		{
 			resp.getWriter().println("Roll-no "+sid+" is not Present");
 		}
+		
+
+		Query q1=session.createQuery("update Student set sname='"+sname+"' where sid="+sid);
+		
+		
+		if(s!=null)
+		{
+			q1.executeUpdate();
+			resp.getWriter().println("Successfully Updated");
+		}
+		
 		tx.commit();
 		session.close();
 		sf.close();
-		if(s!=null)
-		{
-			req.setAttribute("roll", s.getSid());
-			req.setAttribute("name", s.getSname());
-			req.setAttribute("marks", s.getMarks());
-			RequestDispatcher rd=req.getRequestDispatcher("/result.jsp");
-			rd.forward(req, resp);
-		}
-		
 		
 	}
-
 }

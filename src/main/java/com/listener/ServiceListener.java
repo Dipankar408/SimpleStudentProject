@@ -1,7 +1,9 @@
 package com.listener;
 
+import com.dbConfig.DeleteStudent;
 import com.dbConfig.FindStudent;
 import com.dbConfig.StoreStudent;
+import com.dbConfig.UpdateStudent;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.servlet.GuiceServletContextListener;
@@ -19,6 +21,8 @@ public class ServiceListener extends GuiceServletContextListener{
 				serve("/demo").with(ConfigServlet.class);
 				serve("/save").with(StoreStudent.class);
 				serve("/find").with(FindStudent.class);
+				serve("/delete").with(DeleteStudent.class);
+				serve("/update").with(UpdateStudent.class);
 			}
 		});
 	}
