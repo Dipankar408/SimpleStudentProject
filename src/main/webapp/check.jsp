@@ -22,7 +22,7 @@ text-align:center;
 <form action="find" method="post">
 Type Roll-No:<input type="text" name="sid"><br>
 <input type="submit" value="Search">
-</form>
 <a href="index.jsp">Home</a>
+</form>
 </body>
 </html>
