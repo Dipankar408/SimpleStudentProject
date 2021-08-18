@@ -21,30 +21,20 @@ import com.google.inject.Singleton;
 @WebServlet("/delete")
 public class DeleteStudent extends HttpServlet{
 		@Override
-		public void doPost(HttpServletRequest req,HttpServletResponse resp)throws ServletException,IOException
+		public void service(HttpServletRequest req,HttpServletResponse resp)throws ServletException,IOException
 		{
 			int sid=Integer.parseInt(req.getParameter("sid"));
+			
 			Configuration con=new Configuration().configure().addAnnotatedClass(Student.class);
 			SessionFactory sf=con.buildSessionFactory();
 			Session session=sf.openSession();
 			
-			Student s=null;
 			Transaction tx=session.beginTransaction();
-			Query query=session.createQuery("from Student where sid="+sid);
+
 			Query q1=session.createQuery("delete from Student where sid="+sid);
-			try {
-				s=(Student) query.getSingleResult();
-			}
-			catch(NoResultException e)
-			{
-				resp.getWriter().println("Roll-no "+sid+" is not Present");
-			}
-			if(s!=null)
-			{
-				q1.executeUpdate();
-				resp.getWriter().println("Successfully Removed");
-			}
-			
+			q1.executeUpdate();
+			resp.getWriter().println("Roll-no "+sid+" Successfully Removed");
+	
 			tx.commit();
 			session.close();
 			sf.close();

@@ -18,12 +18,14 @@ text-align:center;
 </style>
 </head>
 <body>
-<h2>Delete Student</h2>
+<h2>Update Student</h2>
 <form action="update" method="post">
-Type Roll-No:<input type="text" name="sid" required><br><br>
-New Name:<input type="text" name="sname" required><br><br>
+<a href="index.jsp">Home</a><br><br>
+Roll-No:<input type="text" name="sid" value="<%=request.getParameter("sid")%>" readonly="readonly"/>
+<br><br>
+New Name:<input type="text" name="sname" required/>
+<br><br>
 <input type="submit" value="Update">
-<a href="index.jsp">Home</a>
 </form>
 </body>
 </html>

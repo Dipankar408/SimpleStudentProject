@@ -20,6 +20,7 @@ text-align:center;
 <body>
 <h2>Registration</h2>
 <form action="save" method="post">
+<a href="index.jsp">Home</a><br><br>
 Name:<input type="text" name="sname" required><br><br>
 Roll-no:<input type="number" name="roll_no" required><br><br>
 Marks:<input type="number" name="marks" required><br> 

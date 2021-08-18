@@ -30,8 +30,11 @@ public class FindStudent extends HttpServlet{
 		Session session=sf.openSession();
 		
 		Transaction tx=session.beginTransaction();
+		
 		Query q1=session.createQuery("from Student where sid="+sid);
+		
 		Student s=null;
+		
 		try {
 		s=(Student) q1.getSingleResult();
 		}
@@ -39,9 +42,11 @@ public class FindStudent extends HttpServlet{
 		{
 			resp.getWriter().println("Roll-no "+sid+" is not Present");
 		}
+		
 		tx.commit();
 		session.close();
 		sf.close();
+		
 		if(s!=null)
 		{
 			req.setAttribute("roll", s.getSid());

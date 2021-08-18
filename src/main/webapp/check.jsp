@@ -19,10 +19,11 @@ text-align:center;
 </head>
 <body>
 <h2>Check Student</h2>
+
 <form action="find" method="post">
+<a href="index.jsp">Home</a><br><br>
 Type Roll-No:<input type="text" name="sid"><br>
 <input type="submit" value="Search">
-<a href="index.jsp">Home</a>
 </form>
 </body>
 </html>

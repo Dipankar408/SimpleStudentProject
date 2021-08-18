@@ -43,9 +43,7 @@ public class StoreStudent extends HttpServlet{
 		tx.commit();
 		session.close();
 		sf.close();
-		
-		String msg="This is nothing";
-		req.setAttribute("mes", msg);
+	
 		RequestDispatcher rd=req.getRequestDispatcher("success.jsp");
 		rd.forward(req, resp);
 		

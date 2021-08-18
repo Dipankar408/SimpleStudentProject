@@ -30,27 +30,12 @@ public class UpdateStudent extends HttpServlet{
 		SessionFactory sf=con.buildSessionFactory();
 		Session session=sf.openSession();
 		
-		Student s=null;
 		Transaction tx=session.beginTransaction();
-		Query query=session.createQuery("from Student where sid="+sid);
-		try {
-			s=(Student) query.getSingleResult();
-		}
-		catch(NoResultException e)
-		{
-			resp.getWriter().println("Roll-no "+sid+" is not Present");
-		}
-		
 
 		Query q1=session.createQuery("update Student set sname='"+sname+"' where sid="+sid);
-		
-		
-		if(s!=null)
-		{
-			q1.executeUpdate();
-			resp.getWriter().println("Successfully Updated");
-		}
-		
+		q1.executeUpdate();
+		resp.getWriter().println("Successfully Updated");
+
 		tx.commit();
 		session.close();
 		sf.close();

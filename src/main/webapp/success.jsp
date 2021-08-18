@@ -10,6 +10,5 @@
 Successfully saved<br>
 <a href="index.jsp">Home</a> 
 <br><br>
-${mes}
 </body>
 </html>
