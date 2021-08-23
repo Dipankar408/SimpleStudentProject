@@ -7,7 +7,7 @@
 <title>Success</title>
 </head>
 <body>
-Successfully saved<br>
+${msg}<br>
 <a href="index.jsp">Home</a> 
 <br><br>
 </body>

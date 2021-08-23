@@ -34,13 +34,23 @@ public class StoreStudent extends HttpServlet{
 		std.setSid(sid);
 		std.setSname(sname);
 		std.setMarks(marks);
+		
+		
 		Configuration con=new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Student.class);
 		SessionFactory sf=con.buildSessionFactory();
 		Session session=sf.openSession();
 		
 		Transaction tx=session.beginTransaction();
-		session.save(std);
-		tx.commit();
+		try {
+			session.save(std);
+			tx.commit();
+			req.setAttribute("msg", "Successfully Saved");
+			
+		}
+		catch(Exception e)
+		{
+			req.setAttribute("msg", "Roll-no "+sid+" is present already");
+		}
 		session.close();
 		sf.close();
 	
